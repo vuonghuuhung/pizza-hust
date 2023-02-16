@@ -20,7 +20,7 @@ class AdminController extends Controller
             } elseif ($item->type == "2") {
                 $item->typename = "Topping";
             } else {
-                $item->typename = "Drinking";
+                $item->typename = "Drinks";
             }
             if ($item->has_double_sauce) {
                 $item->has_sauce = "Yes";
@@ -54,6 +54,29 @@ class AdminController extends Controller
         $food = food::find($id);
         $food->delete();
         return redirect()->back()->with('message', 'A new food had been deleted successfully');
+    }
+
+    public function updatefood($id) {
+        $food = food::find($id);
+        return view('admin.updatefood', compact('food'));
+    } 
+
+    public function confirmupdatefood(Request $request, $id) {
+        $food = food::find($id);
+
+        $image = $request->image;
+        $imagename = time() . '.' . $image->getClientOriginalExtension();
+        $request->image->move('foodimages', $imagename);
+
+        $food->image = $imagename;
+        $food->name = $request->name;
+        $food->price = $request->price;
+        $food->type = $request->type;
+        $food->has_double_sauce = $request->has_double_sauce;
+        $food->description = $request->description;
+
+        $food->save();
+        return redirect('food')->with('message', 'A food had been updated successfully');
     }
 
     public function combo() {

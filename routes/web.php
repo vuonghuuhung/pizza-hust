@@ -28,6 +28,8 @@ Route::post('/makeorder', [HomeController::class, 'makeorder']);
 Route::get('/food', [AdminController::class, 'food']);
 Route::post('/addfood', [AdminController::class, 'addfood']);
 Route::get('/deletefood/{id}', [AdminController::class, 'deletefood']);
+Route::get('/updatefood/{id}', [AdminController::class, 'updatefood']);
+Route::post('/confirmupdatefood/{id}', [AdminController::class, 'confirmupdatefood']);
 
 Route::get('/combo', [AdminController::class, 'combo']);
 Route::post('/addcombo', [AdminController::class, 'addcombo']);

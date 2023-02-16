@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
 
     <head>
+        <base href="/public">
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,28 +58,28 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Add a new food</h4>
+                                    <h4 class="card-title">Update food</h4>
                                     <p class="card-description"> You should input all the information </p>
-                                    <form class="forms-sample" action="{{ url('/addfood') }}" method="post"
+                                    <form class="forms-sample" action="{{ url('/confirmupdatefood', $food->id) }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="exampleInputName1">Name</label>
                                             <input type="text" name="name" class="form-control"
-                                                id="exampleInputName1" placeholder="Name">
+                                                id="exampleInputName1" placeholder="Name" value="{{ $food->name }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputName1">Price</label>
                                             <input type="number" name="price" class="form-control"
-                                                id="exampleInputName1" placeholder="Price">
+                                                id="exampleInputName1" placeholder="Price" value="{{ $food->price }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleSelectGender">Type</label>
+                                            <label for="exampleSelectGender">Rechoose the type</label>
                                             <select name="type" class="form-control" id="exampleSelectGender">
-                                                <option value="0">Pizza</option>
-                                                <option value="1">Side dish</option>
-                                                <option value="2">Topping</option>
-                                                <option value="3">Drinking</option>
+                                                <option <?php if ($food->type == 0) echo 'selected'; ?> value="0">Pizza</option>
+                                                <option <?php if ($food->type == 1) echo 'selected'; ?> value="1">Side dish</option>
+                                                <option <?php if ($food->type == 2) echo 'selected'; ?> value="2">Topping</option>
+                                                <option <?php if ($food->type == 3) echo 'selected'; ?> value="3">Drinking</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -88,20 +89,20 @@
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input"
                                                         name="has_double_sauce" id="optionsRadios2" value="0"
-                                                        checked>No</label>
+                                                        <?php if ($food->has_double_sauce == 0) echo 'checked'; ?> >No</label>
                                             </div>
                                             <div class="form-check">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input"
                                                         name="has_double_sauce" id="optionsRadios2"
-                                                        value="1">Yes</label>
+                                                        value="1"  <?php if ($food->has_double_sauce == 1) echo 'checked'; ?> >Yes</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Image upload</label>
-                                            <input type="file" name="image" class="file-upload-default">
+                                            <input type="file" value="{{ $food->image }}" name="image" class="file-upload-default">
                                             <div class="input-group col-xs-12">
-                                                <input type="text" class="form-control file-upload-info" disabled
+                                                <input type="text" value="{{ $food->image }}" class="form-control file-upload-info" disabled
                                                     placeholder="Upload Image">
                                                 <span class="input-group-append">
                                                     <button class="file-upload-browse btn btn-primary"
@@ -111,53 +112,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleTextarea1">Description</label>
-                                            <textarea class="form-control" name="description" id="exampleTextarea1" rows="4"></textarea>
+                                            <textarea class="form-control" name="description" id="exampleTextarea1" rows="4">{{ $food->description }}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Food List</h4>
-                                {{-- <p class="card-description"> Add class <code>.table-bordered</code> --}}
-                                {{-- </p> --}}
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Type</th>
-                                                <th>Double sauce</th>
-                                                <th>Image</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($food_list as $item)
-                                                <tr align="center">
-                                                    <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->price }}</td>
-                                                    <td>{{ $item->typename }}</td>
-                                                    <td>{{ $item->has_sauce }}</td>
-                                                    <td><img style="width: 80px; height: 80px"
-                                                            src="/foodimages/{{ $item->image }}" alt=""></td>
-                                                    <td>{{ $item->description }}</td>
-                                                    <td><a onclick="return confirm('Are you sure to delete this food?')"
-                                                            href="{{ url('/deletefood', $item->id) }}"
-                                                            class="btn btn-danger btn-fw">Delete</a><hr/>
-                                                        <a href="{{ url('/updatefood', $item->id) }}"
-                                                            class="btn btn-warning btn-fw">Update</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
