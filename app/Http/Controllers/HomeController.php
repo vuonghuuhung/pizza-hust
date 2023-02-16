@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Combo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +17,15 @@ class HomeController extends Controller
         $dishes = food::select('*')->where('type', '=', '1')->get();
         $topping = food::select('*')->where('type', '=', '2')->get();
         $water = food::select('*')->where('type', '=', '3')->get();
+
+        $combos = combo::all();
+
         $cart_counter = cart::where('user_id', Auth::id())->count();
         $usertype = Auth::user()->usertype;
         if ($usertype == '1') {
             return view('admin.home');
         } else {
-            return view('normal.home', compact('pizzas', 'dishes', 'topping', 'water', 'cart_counter'));
+            return view('normal.home', compact('pizzas', 'dishes', 'topping', 'water', 'cart_counter', 'combos'));
         }
     }
 
@@ -59,10 +63,31 @@ class HomeController extends Controller
         }
     }
 
+    public function addcombotocart($id) {
+        if (Auth::id()) {
+            $combo = combo::find($id);
+            $user_id = Auth::id();
+            $food_id = $id;
+            $cart = new cart;
+            $cart->user_id = $user_id;
+            $cart->food_id = $food_id;
+            $cart->type = 1; // 1: combo
+            $cart->quantity = 1;
+            $cart->size = $combo->size;
+            $cart->save();
+            return redirect()->back();
+        } else {
+            return redirect('/login');
+        }
+    }
+
     public function cart($id) {
         $user_id = $id;
         $cart_counter = cart::where('user_id', Auth::id())->count();
-        $cart = cart::select('carts.id', 'food.name', 'food.price', 'carts.quantity', 'carts.type', 'food.image', 'carts.size')->where('user_id', $user_id)->join('food', 'carts.food_id', '=', 'food.id')->get();
+        $cart = cart::select('carts.id', 'food.name', 'food.price', 'carts.quantity', 'carts.type', 'food.image', 'carts.size')->where([
+            ['user_id', '=', $id],
+            ['carts.type', '=', 0]
+        ])->join('food', 'carts.food_id', '=', 'food.id')->get();
         $totalPrice = 0;
         foreach($cart as $item) {
             $totalPrice += $item->price * $item->quantity;

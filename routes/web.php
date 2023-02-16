@@ -22,6 +22,7 @@ Route::get('/logout', [HomeController::class, 'logout']);
 
 Route::get('/cart/{id}', [HomeController::class, 'cart']);
 Route::get('/addtocart/{id}', [HomeController::class, 'addtocart']);
+Route::get('/addcombotocart/{id}', [HomeController::class, 'addcombotocart']);
 
 Route::post('/makeorder', [HomeController::class, 'makeorder']);
 
