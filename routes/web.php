@@ -40,6 +40,14 @@ Route::get('/order', [AdminController::class, 'order']);
 
 Route::get('/menu', [AdminController::class, 'menu']);
 
+Route::get('/user', [AdminController::class, 'user']);
+Route::get('/deleteuser/{id}', [AdminController::class, 'deleteuser']);
+
+Route::get('/rejectorder/{id}', [AdminController::class, 'rejectorder']);
+Route::get('/confirmorder/{id}', [AdminController::class, 'confirmorder']);
+Route::get('/shippingorder/{id}', [AdminController::class, 'shippingorder']);
+Route::get('/finisheoder/{id}', [AdminController::class, 'finisheoder']);
+
 
 Route::middleware([
     'auth:sanctum',

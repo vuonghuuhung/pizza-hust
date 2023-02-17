@@ -15,3 +15,12 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="normal/js/google-map.js"></script>
 <script src="normal/js/main.js"></script>
+<script>
+    $(document).ready(
+    function(){
+        $(".btn-to-cart").click(function () {
+            $("#before-cart").show("slow");
+        });
+
+    });
+</script>

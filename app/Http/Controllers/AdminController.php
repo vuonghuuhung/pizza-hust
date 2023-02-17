@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Combo;
 use App\Models\Order;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -122,11 +123,18 @@ class AdminController extends Controller
         foreach($orders as $item) {
             if ($item->status == "0") {
                 $item->word_status = "Pending";
+                $item->class = "badge-info";
             } elseif ($item->status == "1") {
+                $item->class = "badge-primary";
                 $item->word_status = "Confirmed";
             } elseif ($item->status == "2") {
+                $item->class = "badge-warning";
                 $item->word_status = "Shipping";
+            } elseif ($item->status == "3") {
+                $item->class = "badge-danger";
+                $item->word_status = "Rejected";
             } else {
+                $item->class = "badge-success";
                 $item->word_status = "Finished";
             }
         }
@@ -136,4 +144,44 @@ class AdminController extends Controller
     public function menu() {
         return view('admin.menu');
     }
+
+    public function user() {
+        $users = user::all();
+        return view('admin.user', compact('users'));
+    }
+
+    public function deleteuser($id) {
+        $user = user::find($id);
+        $user->delete();
+        return redirect()->back();
+    }
+
+    public function rejectorder($id) {
+        $order = order::find($id);
+        $order->status = 3;
+        $order->save();
+        return redirect()->back();
+    }
+
+    public function shippingorder($id) {
+        $order = order::find($id);
+        $order->status = 2;
+        $order->save();
+        return redirect()->back();
+    }
+
+    public function confirmorder($id) {
+        $order = order::find($id);
+        $order->status = 1;
+        $order->save();
+        return redirect()->back();
+    }
+
+    public function finisheoder($id) {
+        $order = order::find($id);
+        $order->status = 4;
+        $order->save();
+        return redirect()->back();        
+    }
+
 }

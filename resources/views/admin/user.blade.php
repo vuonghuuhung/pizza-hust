@@ -42,13 +42,8 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    @if (session()->has('message'))
-                        <div class="alert alert-success">
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
                     <div class="page-header">
-                        <h3 class="page-title"> Order Management </h3>
+                        <h3 class="page-title"> User Management </h3>
                         <nav aria-label="breadcrumb">
 
                         </nav>
@@ -56,7 +51,7 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Order List</h4>
+                                <h4 class="card-title">User List</h4>
                                 {{-- <p class="card-description"> Add class <code>.table-bordered</code> --}}
                                 {{-- </p> --}}
                                 <div class="table-responsive">
@@ -64,36 +59,23 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Address</th>
                                                 <th>Phone</th>
-                                                <th>Food Name</th>
-                                                <th>Status</th>
-                                                <th>Quantity</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($orders as $item)
+                                            @foreach ($users as $item)
                                                 <tr align="center">
                                                     <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->address }}</td>
                                                     <td>{{ $item->phone }}</td>
-                                                    <td>{{ $item->food_name }}</td>
-                                                    <td><label class="badge {{ $item->class }}">{{ $item->word_status }}</label></td>
-                                                    <td>{{ $item->quantity }}</td>
-                                                    <td><a onclick="return confirm('Are you sure to delete this food?')"
-                                                            href="{{ url('/rejectorder', $item->id) }}"
-                                                            class="btn btn-danger btn-fw">Reject</a>
-                                                        <a onclick="return confirm('Are you sure to confirm this food?')"
-                                                            href="{{ url('/confirmorder', $item->id) }}"
-                                                            class="btn btn-primary btn-fw">Confirm</a>
-                                                            <a onclick="return confirm('Are you sure to shipping this food?')"
-                                                            href="{{ url('/shippingorder', $item->id) }}"
-                                                            class="btn btn-info btn-fw">Shipping</a>
-                                                            <a onclick="return confirm('Are you sure to finished this food?')"
-                                                            href="{{ url('/finisheoder', $item->id) }}"
-                                                            class="btn btn-success btn-fw">Finished</a>
-                                                        </td>
+                                                    <td>{{ $item->email }}</td>
+                                                    <td>{{ $item->address }}</td>
+                                                    <td><a onclick="return confirm('Are you sure to delete this user?')"
+                                                            href="{{ url('/deleteuser', $item->id) }}"
+                                                            class="btn btn-danger btn-fw">Delete</a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
