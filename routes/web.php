@@ -38,6 +38,9 @@ Route::get('/deletecombo/{id}', [AdminController::class, 'deletecombo']);
 
 Route::get('/order', [AdminController::class, 'order']);
 
+Route::get('/menu', [AdminController::class, 'menu']);
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

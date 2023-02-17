@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="admin/assets/vendors/flag-icon-css/css/flag-icon.min.css">
         <link rel="stylesheet" href="admin/assets/vendors/owl-carousel-2/owl.carousel.min.css">
         <link rel="stylesheet" href="admin/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+        @livewireStyles
     </head>
 </head>
 
@@ -148,70 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Add food to combo</h4>
-                                    <p class="card-description"> You should input all the information </p>
-                                    <form class="forms-sample" action="{{ url('/addfoodtocombo') }}" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="exampleSelectGender">Select Combo Name</label>
-                                            <select class="form-control" name="combo_name" id="exampleSelectGender">
-                                                @foreach ($combos as $item)
-                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleSelectGender">Select Pizza</label>
-
-                                            <div class="card-body">
-                                                <ul id="pizza_list">
-                                                </ul>
-                                            </div>
-
-                                            <select class="form-control" name="pizza_name" id="exampleSelectGender">
-                                                @foreach ($pizzas as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleSelectGender">Select Side Dish</label>
-                                            <select class="form-control" name="side_dish_name"
-                                                id="exampleSelectGender">
-                                                @foreach ($dishes as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleSelectGender">Select Topping</label>
-                                            <select class="form-control" name="topping_name"
-                                                id="exampleSelectGender">
-                                                @foreach ($topping as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleSelectGender">Select Water</label>
-                                            <select class="form-control" name="water_name" id="exampleSelectGender">
-                                                @foreach ($water as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                        <button class="btn btn-dark">Cancel</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    @livewire('box')
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
@@ -289,6 +227,7 @@
             <script src="admin/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
             <script src="admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
             <script src="admin/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+            @livewireScripts
 </body>
 
 </html>

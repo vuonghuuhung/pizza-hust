@@ -34,7 +34,8 @@ class HomeController extends Controller
         $dishes = food::select('*')->where('type', '=', '1')->get();
         $topping = food::select('*')->where('type', '=', '2')->get();
         $water = food::select('*')->where('type', '=', '3')->get();
-        return view('normal.home', compact('pizzas', 'dishes', 'topping', 'water'));
+        $combos = combo::all();
+        return view('normal.home', compact('pizzas', 'dishes', 'topping', 'water', 'combos'));
     }
 
     public function logout() {
@@ -43,7 +44,7 @@ class HomeController extends Controller
         $topping = food::select('*')->where('type', '=', '2')->get();
         $water = food::select('*')->where('type', '=', '3')->get();
         auth()->logout();
-        return view('normal.home', compact('pizzas', 'dishes', 'topping', 'water'));
+        return redirect('/');
     }
 
     public function addtocart($id) {

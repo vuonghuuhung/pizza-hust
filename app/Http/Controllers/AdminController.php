@@ -132,4 +132,8 @@ class AdminController extends Controller
         }
         return view('admin.order', compact('orders'));
     }
+
+    public function menu() {
+        return view('admin.menu');
+    }
 }

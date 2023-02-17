@@ -110,11 +110,11 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="{{ url('/menu') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-contacts"></i>
                 </span>
-                <span class="menu-title">Icons</span>
+                <span class="menu-title">Menus</span>
             </a>
         </li>
         <li class="nav-item menu-items">
