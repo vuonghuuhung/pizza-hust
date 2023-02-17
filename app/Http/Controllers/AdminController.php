@@ -7,6 +7,7 @@ use App\Models\Food;
 use App\Models\Combo;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -184,4 +185,20 @@ class AdminController extends Controller
         return redirect()->back();        
     }
 
+
+    public function statistic() {
+        $order_full = order::where('status', '=', 4)->get();
+        $doanhthu = 0;
+        foreach($order_full as $item) {
+            $doanhthu += $item->price * $item->quantity;
+        }
+        $order_day = order::whereDate('created_at', Carbon::today())->count();
+        $today = 0;
+        // foreach($order_day as $item) {
+        //     $today += $item->price * $item->quantity;
+        // }
+        return view('admin.statistic', compact('doanhthu', 'order_day'));
+    }
+
+    
 }

@@ -47,6 +47,8 @@ Route::get('/rejectorder/{id}', [AdminController::class, 'rejectorder']);
 Route::get('/confirmorder/{id}', [AdminController::class, 'confirmorder']);
 Route::get('/shippingorder/{id}', [AdminController::class, 'shippingorder']);
 Route::get('/finisheoder/{id}', [AdminController::class, 'finisheoder']);
+Route::get('/statistic', [AdminController::class, 'statistic']);
+
 
 
 Route::middleware([
